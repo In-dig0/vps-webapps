@@ -80,6 +80,27 @@
             filter: drop-shadow(0 0 30px rgba(0, 212, 255, 0.4));
         }
 
+        .tagline {
+            font-size: 1.1em;
+            font-weight: 300;
+            letter-spacing: 2px;
+            margin-top: 20px;
+            background: linear-gradient(135deg, #ffa500 0%, #ff8c00 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-transform: uppercase;
+        }
+
+        .header-divider {
+            width: 100%;
+            max-width: 600px;
+            height: 1px;
+            background: linear-gradient(90deg, transparent 0%, #00d4ff 20%, #ffa500 50%, #00d4ff 80%, transparent 100%);
+            margin: 40px auto 0;
+            opacity: 0.5;
+        }
+
         @keyframes logoGlow {
             0%, 100% { 
                 filter: drop-shadow(0 0 30px rgba(0, 212, 255, 0.4));
@@ -273,6 +294,15 @@
                 width: 200px;
             }
 
+            .tagline {
+                font-size: 0.9em;
+                letter-spacing: 1px;
+            }
+
+            .header-divider {
+                max-width: 90%;
+            }
+
             h1 {
                 font-size: 2em;
             }
@@ -299,7 +329,9 @@
         <header>
             <div class="logo-container">
                 <img src="bluhive-logo.png" alt="Blu Hive Logo" class="main-logo">
+                <p class="tagline">Enterprise Cloud Services</p>
             </div>
+            <div class="header-divider"></div>
         </header>
 
         <section class="services-grid">
