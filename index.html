@@ -1,84 +1,351 @@
 <!DOCTYPE html>
-<html>
+<html lang="it">
 <head>
-    <title>Servizi Cloud - BARRIC73 VPS OCI</title>
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/png" href="oracle-cloud.png">
+    <title>Blu Hive - Servizi VPS Oracle Cloud</title>
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            margin: 20px;
-            background-color: #212529; /* Sfondo scuro quasi nero */
-            color: #f8f9fa; /* Testo chiaro */
+            background: linear-gradient(135deg, #0a0e27 0%, #1a1f3a 50%, #0f1419 100%);
+            color: #e0e0e0;
+            min-height: 100vh;
+            overflow-x: hidden;
         }
+
+        /* Animated background hexagons */
+        .bg-hexagons {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 0;
+            opacity: 0.1;
+        }
+
+        .hexagon {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            border: 2px solid #00d4ff;
+            clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+            animation: float 20s infinite ease-in-out;
+        }
+
+        .hexagon:nth-child(1) { top: 10%; left: 10%; animation-delay: 0s; }
+        .hexagon:nth-child(2) { top: 60%; left: 80%; animation-delay: -5s; border-color: #ffa500; }
+        .hexagon:nth-child(3) { top: 80%; left: 20%; animation-delay: -10s; }
+        .hexagon:nth-child(4) { top: 30%; left: 70%; animation-delay: -15s; border-color: #ffa500; }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            25% { transform: translate(20px, -20px) rotate(90deg); }
+            50% { transform: translate(-20px, 20px) rotate(180deg); }
+            75% { transform: translate(20px, 20px) rotate(270deg); }
+        }
+
         .container {
-            max-width: 800px;
-            margin: auto;
-            background: #343a40; /* Contenitore grigio scuro */
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4); /* Ombra più scura */
+            position: relative;
+            z-index: 1;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
         }
-        h1 {
-            color: #00bfff; /* Blu leggermente più brillante per il titolo */
-            border-bottom: 2px solid #00bfff;
-            padding-bottom: 10px;
+
+        /* Header */
+        header {
             text-align: center;
+            margin-bottom: 60px;
+            animation: fadeInDown 1s ease;
         }
-        h2 {
-            color: #adb5bd; /* Grigio chiaro per intestazioni secondarie */
-            margin-top: 30px;
-            padding-bottom: 5px;
-            border-bottom: 1px solid #495057; /* Linea separatrice più scura */
+
+        .logo-container {
+            display: inline-block;
+            margin-bottom: 30px;
+            position: relative;
         }
-        ul {
-            list-style-type: none;
-            padding: 0;
+
+        .main-logo {
+            width: 280px;
+            height: auto;
+            animation: fadeInDown 1s ease, logoGlow 3s infinite ease-in-out;
+            filter: drop-shadow(0 0 30px rgba(0, 212, 255, 0.4));
         }
-        li a {
-            display: block;
-            margin: 10px 0;
-            padding: 15px;
-            background-color: #495057; /* Sfondo link scuro */
+
+        @keyframes logoGlow {
+            0%, 100% { 
+                filter: drop-shadow(0 0 30px rgba(0, 212, 255, 0.4));
+            }
+            50% { 
+                filter: drop-shadow(0 0 50px rgba(0, 212, 255, 0.6)) drop-shadow(0 0 20px rgba(255, 165, 0, 0.3));
+            }
+        }
+
+        h1 {
+            font-size: 3em;
+            font-weight: 300;
+            background: linear-gradient(135deg, #00d4ff 0%, #ffa500 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 10px;
+            letter-spacing: 2px;
+            display: none;
+        }
+
+        .subtitle {
+            font-size: 1.2em;
+            color: #a0a0a0;
+            font-weight: 300;
+        }
+
+        /* Services Grid */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+
+        /* Service Card */
+        .service-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            border: 1px solid rgba(0, 212, 255, 0.2);
+            padding: 40px 30px;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            animation: fadeInUp 0.8s ease;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #00d4ff 0%, #ffa500 100%);
+            transform: scaleX(0);
+            transition: transform 0.4s ease;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            border-color: rgba(0, 212, 255, 0.5);
+            box-shadow: 0 20px 40px rgba(0, 212, 255, 0.2);
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        .service-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .service-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #00d4ff 0%, #0099cc 100%);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5em;
+            margin-bottom: 25px;
+            box-shadow: 0 10px 30px rgba(0, 212, 255, 0.3);
+            transition: all 0.4s ease;
+        }
+
+        .service-card:hover .service-icon {
+            transform: rotate(5deg) scale(1.1);
+            box-shadow: 0 15px 40px rgba(0, 212, 255, 0.5);
+        }
+
+        .service-card.coming-soon .service-icon {
+            background: linear-gradient(135deg, #444 0%, #666 100%);
+            box-shadow: 0 10px 30px rgba(100, 100, 100, 0.3);
+        }
+
+        .service-title {
+            font-size: 1.5em;
+            margin-bottom: 15px;
+            color: #00d4ff;
+            font-weight: 600;
+        }
+
+        .service-card.coming-soon .service-title {
+            color: #888;
+        }
+
+        .service-description {
+            color: #b0b0b0;
+            line-height: 1.6;
+            margin-bottom: 25px;
+        }
+
+        .service-link {
+            display: inline-block;
+            padding: 12px 30px;
+            background: linear-gradient(135deg, #00d4ff 0%, #0099cc 100%);
+            color: #fff;
             text-decoration: none;
-            color: #ffeb8f; /* Testo link giallo chiaro */
-            border-radius: 6px;
-            transition: background-color 0.3s;
-            font-weight: 500;
-            border: 1px solid #6c757d; /* Bordo scuro */
+            border-radius: 10px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 212, 255, 0.3);
         }
-        li a:hover {
-            background-color: #6c757d; /* Hover più chiaro */
-            color: #e2f2ff; /* Testo hover più chiaro */
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+
+        .service-link:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 212, 255, 0.5);
         }
-        .admin a {
-            background-color: #7b7b4a; /* Sfondo admin scuro */
-            border: 1px solid #999966; /* Bordo admin scuro */
-            color: #ffeb8f; /* Testo admin chiaro */
+
+        .coming-soon-badge {
+            display: inline-block;
+            padding: 8px 20px;
+            background: rgba(255, 165, 0, 0.2);
+            border: 1px solid #ffa500;
+            border-radius: 20px;
+            color: #ffa500;
+            font-size: 0.85em;
+            font-weight: 600;
+            text-transform: uppercase;
         }
-        .admin a:hover {
-            background-color: #999966; /* Hover admin */
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 40px 20px;
+            border-top: 1px solid rgba(0, 212, 255, 0.1);
+            color: #808080;
+        }
+
+        .security-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 15px 25px;
+            background: rgba(0, 212, 255, 0.1);
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+
+        .lock-icon {
+            font-size: 1.5em;
+            color: #00d4ff;
+        }
+
+        /* Animations */
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .main-logo {
+                width: 200px;
+            }
+
+            h1 {
+                font-size: 2em;
+            }
+
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .service-card {
+                padding: 30px 20px;
+            }
         }
     </style>
 </head>
 <body>
+    <div class="bg-hexagons">
+        <div class="hexagon"></div>
+        <div class="hexagon"></div>
+        <div class="hexagon"></div>
+        <div class="hexagon"></div>
+    </div>
+
     <div class="container">
-        <h1>
-            <img src="oracle-cloud.png" alt="Logo Oracle Cloud Infrastructure" style="height: 30px; vertical-align: middle; margin-right: 10px; margin-top: -5px;">
-            Servizi VPS Oracle Cloud Infrastructure
-        </h1>
+        <header>
+            <div class="logo-container">
+                <img src="bluhive-logo.png" alt="Blu Hive Logo" class="main-logo">
+            </div>
+        </header>
 
-        <p>Utilizza questa pagina per accedere ai servizi ospitati sulla macchina virtuale.</p>
+        <section class="services-grid">
+            <!-- EDI Forecast Service -->
+            <div class="service-card">
+                <div class="service-icon">📈</div>
+                <h2 class="service-title">EDI Forecast Requirements</h2>
+                <p class="service-description">
+                    Gestione e analisi forecast EDI in tempo reale. 
+                    Webapp Streamlit per il monitoraggio dei requirement EDI con visualizzazioni interattive.
+                </p>
+                <a href="https://ediforecast.bluhive.abrdns.com" class="service-link">Accedi al Servizio →</a>
+            </div>
 
-        <h2>🌐 Applicazioni</h2>
-        <p>Accesso ai servizi per gli utenti finali:</p>
-        <ul>
-            <li><a href="https://ediforecast.barric73.cloud-ip.cc/" target="_blank">📈 EDI Forecast Requirements </a></li>
-        </ul>
-        
-        <hr style="margin-top: 40px;">
-        <p style="text-align: center; font-size: 0.8em; color: #adb5bd;">Tutti i collegamenti sono protetti da crittografia HTTPS (Let's Encrypt).</p>
+            <!-- XML Invoice Converter - Coming Soon -->
+            <div class="service-card coming-soon">
+                <div class="service-icon">📄</div>
+                <h2 class="service-title">Convertitore Fatture XML</h2>
+                <p class="service-description">
+                    Webapp Streamlit per la conversione e gestione di fatture elettroniche XML. 
+                    Interfaccia intuitiva per import/export e validazione.
+                </p>
+                <span class="coming-soon-badge">Coming Soon</span>
+            </div>
+
+            <!-- ZAMMAD - Coming Soon -->
+            <div class="service-card coming-soon">
+                <div class="service-icon">🎫</div>
+                <h2 class="service-title">ZAMMAD Ticketing</h2>
+                <p class="service-description">
+                    Sistema di ticketing IT self-hosted per la gestione delle richieste di supporto. 
+                    Piattaforma completa per helpdesk e customer service.
+                </p>
+                <span class="coming-soon-badge">Coming Soon</span>
+            </div>
+        </section>
+
+        <footer>
+            <div class="security-badge">
+                <span class="lock-icon">🔒</span>
+                <span>Tutti i servizi sono protetti da crittografia HTTPS (Let's Encrypt)</span>
+            </div>
+            <p style="margin-top: 30px; font-size: 0.9em;">
+                © 2025 Blu Hive VPS - Oracle Cloud Infrastructure
+            </p>
+        </footer>
     </div>
 </body>
 </html>
