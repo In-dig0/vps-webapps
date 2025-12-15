@@ -23,7 +23,6 @@
             overflow-x: hidden;
         }
 
-        /* Animated background hexagons */
         .bg-hexagons {
             position: fixed;
             top: 0;
@@ -64,7 +63,6 @@
             padding: 20px 20px;
         }
 
-        /* Header */
         header {
             text-align: center;
             margin-bottom: 40px;
@@ -114,25 +112,6 @@
             }
         }
 
-        h1 {
-            font-size: 3em;
-            font-weight: 300;
-            background: linear-gradient(135deg, #00d4ff 0%, #ffa500 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin-bottom: 10px;
-            letter-spacing: 2px;
-            display: none;
-        }
-
-        .subtitle {
-            font-size: 1.2em;
-            color: #a0a0a0;
-            font-weight: 300;
-        }
-
-        /* Services Grid */
         .services-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
@@ -140,7 +119,6 @@
             margin-bottom: 40px;
         }
 
-        /* Service Card */
         .service-card {
             background: rgba(255, 255, 255, 0.05);
             backdrop-filter: blur(10px);
@@ -247,7 +225,6 @@
             text-transform: uppercase;
         }
 
-        /* Footer */
         footer {
             text-align: center;
             padding: 30px 20px;
@@ -270,7 +247,6 @@
             color: #00d4ff;
         }
 
-        /* Animations */
         @keyframes fadeInDown {
             from {
                 opacity: 0;
@@ -293,7 +269,6 @@
             }
         }
 
-        /* Responsive */
         @media (max-width: 768px) {
             .main-logo {
                 width: 200px;
@@ -306,10 +281,6 @@
 
             .header-divider {
                 max-width: 90%;
-            }
-
-            h1 {
-                font-size: 2em;
             }
 
             .services-grid {
@@ -351,8 +322,8 @@
                 <a href="https://ediforecast.bluhive.abrdns.com" class="service-link">Accedi al Servizio →</a>
             </div>
 
-            <!-- XML Invoice Converter - Coming Soon -->
-            <div class="service-card coming-soon">
+            <!-- XML Invoice Converter - ACTIVE -->
+            <div class="service-card">
                 <div class="service-icon">📄</div>
                 <h2 class="service-title">Convertitore Fatture XML</h2>
                 <p class="service-description">
