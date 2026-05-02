@@ -154,6 +154,34 @@
             transform: scaleX(1);
         }
 
+        /* Card nuova — bordo arancione per evidenziarla */
+        .service-card.new-service {
+            border-color: rgba(255, 165, 0, 0.4);
+        }
+
+        .service-card.new-service::before {
+            background: linear-gradient(90deg, #ffa500 0%, #ff6600 100%);
+        }
+
+        .service-card.new-service:hover {
+            border-color: rgba(255, 165, 0, 0.7);
+            box-shadow: 0 20px 40px rgba(255, 165, 0, 0.2);
+        }
+
+        .new-badge {
+            position: absolute;
+            top: 18px;
+            right: 18px;
+            background: linear-gradient(135deg, #ffa500 0%, #ff6600 100%);
+            color: #fff;
+            font-size: 0.7em;
+            font-weight: 700;
+            padding: 4px 10px;
+            border-radius: 20px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
         .service-icon {
             width: 70px;
             height: 70px;
@@ -168,9 +196,18 @@
             transition: all 0.4s ease;
         }
 
+        .service-card.new-service .service-icon {
+            background: linear-gradient(135deg, #ffa500 0%, #ff6600 100%);
+            box-shadow: 0 10px 30px rgba(255, 165, 0, 0.3);
+        }
+
         .service-card:hover .service-icon {
             transform: rotate(5deg) scale(1.1);
             box-shadow: 0 15px 40px rgba(0, 212, 255, 0.5);
+        }
+
+        .service-card.new-service:hover .service-icon {
+            box-shadow: 0 15px 40px rgba(255, 165, 0, 0.5);
         }
 
         .service-card.coming-soon .service-icon {
@@ -183,6 +220,10 @@
             margin-bottom: 12px;
             color: #00d4ff;
             font-weight: 600;
+        }
+
+        .service-card.new-service .service-title {
+            color: #ffa500;
         }
 
         .service-card.coming-soon .service-title {
@@ -208,9 +249,18 @@
             box-shadow: 0 5px 15px rgba(0, 212, 255, 0.3);
         }
 
+        .service-card.new-service .service-link {
+            background: linear-gradient(135deg, #ffa500 0%, #ff6600 100%);
+            box-shadow: 0 5px 15px rgba(255, 165, 0, 0.3);
+        }
+
         .service-link:hover {
             transform: translateY(-2px);
             box-shadow: 0 8px 25px rgba(0, 212, 255, 0.5);
+        }
+
+        .service-card.new-service .service-link:hover {
+            box-shadow: 0 8px 25px rgba(255, 165, 0, 0.5);
         }
 
         .coming-soon-badge {
@@ -248,48 +298,21 @@
         }
 
         @keyframes fadeInDown {
-            from {
-                opacity: 0;
-                transform: translateY(-30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            from { opacity: 0; transform: translateY(-30px); }
+            to   { opacity: 1; transform: translateY(0); }
         }
 
         @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            from { opacity: 0; transform: translateY(30px); }
+            to   { opacity: 1; transform: translateY(0); }
         }
 
         @media (max-width: 768px) {
-            .main-logo {
-                width: 200px;
-            }
-
-            .tagline {
-                font-size: 0.9em;
-                letter-spacing: 1px;
-            }
-
-            .header-divider {
-                max-width: 90%;
-            }
-
-            .services-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .service-card {
-                padding: 30px 20px;
-            }
+            .main-logo { width: 200px; }
+            .tagline { font-size: 0.9em; letter-spacing: 1px; }
+            .header-divider { max-width: 90%; }
+            .services-grid { grid-template-columns: 1fr; }
+            .service-card { padding: 30px 20px; }
         }
     </style>
 </head>
@@ -311,18 +334,8 @@
         </header>
 
         <section class="services-grid">
-            <!-- EDI Forecast Service -->
-            <div class="service-card">
-                <div class="service-icon">📈</div>
-                <h2 class="service-title">EDI Forecast Requirements</h2>
-                <p class="service-description">
-                    Gestione e analisi forecast EDI in tempo reale. 
-                    Webapp Streamlit per il monitoraggio dei requirement EDI con visualizzazioni interattive.
-                </p>
-                <a href="https://ediforecast.bluhive.abrdns.com" class="service-link" target="_blank" rel="noopener noreferrer">Accedi al Servizio →</a>
-            </div>
 
-            <!-- XML Invoice Converter - ACTIVE -->
+            <!-- 1. XML Invoice Converter -->
             <div class="service-card">
                 <div class="service-icon">📄</div>
                 <h2 class="service-title">XML Invoice Converter</h2>
@@ -333,16 +346,29 @@
                 <a href="https://xic.bluhive.abrdns.com" class="service-link" target="_blank" rel="noopener noreferrer">Accedi al Servizio →</a>
             </div>
 
-            <!-- FREESCOUT - ACTIVE -->
+            <!-- 2. SAP MDG — NUOVO -->
+            <div class="service-card new-service">
+                <span class="new-badge">Nuovo</span>
+                <div class="service-icon">🔍</div>
+                <h2 class="service-title">SAP MDG — Migration Data Governance</h2>
+                <p class="service-description">
+                    Pipeline di qualità dati per la migrazione ERP legacy → SAP S/4HANA. 
+                    Dashboard Streamlit per il monitoraggio e analisi dei controlli di qualità.
+                </p>
+                <a href="https://app-mdg.bluhive.abrdns.com" class="service-link" target="_blank" rel="noopener noreferrer">Accedi al Servizio →</a>
+            </div>
+
+            <!-- 3. FREESCOUT Ticketing (Beta) -->
             <div class="service-card">
                 <div class="service-icon">🎫</div>
-                <h2 class="service-title">FREESCOUT Ticketing</h2>
+                <h2 class="service-title">FREESCOUT Ticketing <span style="font-size:0.65em; color:#ffa500; font-weight:600;">(Beta)</span></h2>
                 <p class="service-description">
                     Sistema di ticketing IT self-hosted per la gestione delle richieste di supporto. 
                     Piattaforma completa per helpdesk e customer service.
                 </p>
                 <a href="https://freescout.bluhive.abrdns.com" class="service-link" target="_blank" rel="noopener noreferrer">Accedi al Servizio →</a>
             </div>
+
         </section>
 
         <footer>
@@ -357,3 +383,4 @@
     </div>
 </body>
 </html>
+
